@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WHAP Study Group | Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap">
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <div class="header-main">
+      <div class="logo-large"><span class="logo-large-text">WHAP</span></div>
+      <div class="header-main-text tablet">WHAP Study Group | Home</div>
+    </div>
+    <div class="header-sticky">
+      <div class="logo-small"><span class="logo-small-text">WHAP</span></div>
+      <div class="header-sticky-links">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="#">Posts</a>
+        <a class="link" href="#">Create a New Post</a>
+        <a class="link active" href="#">Login</a>
+        <a class="link" href="#">More</a>
+      </div>
+    </div>
+    <div class="content-full">
+      <h1>Login</h1>
+      <input id="username" placeholder="Username">
+      <input id="password" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <p>Don't have an account? <a href="signup.html">Sign up instead</a>.</p>
+    </div>
+    <script src="javascript.js"></script>
+    <script>
+      function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        // Do some firebase stuff; setup firebase in javascript.js
+      }
+    </script>
+  </body>
+</html>
