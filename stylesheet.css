@@ -118,6 +118,20 @@ body {
     width: calc(100% - 4vw);
     padding: 2vw;
   }
+  .main-container {
+    display: flex;
+    width: 80vw;
+    margin: 0px 10vw;
+  }
+  .main-content {
+    width: 50vw;
+    padding: 5vw;
+  }
+  .main-sidebar {
+    background-color: rgb(240, 240, 240);
+    width: 16vw;
+    padding: 2vw;
+  }
 
   .tablet {
     display: inline-block;
