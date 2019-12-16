@@ -105,6 +105,15 @@ body {
   border-bottom: 3px solid rgb(100, 100, 225) !important;
 }
 
+.main-container {
+  display: flex;
+  width: 100vw;
+}
+.main-content {
+  width: 90vw;
+  padding: 5vw;
+}
+
 .tablet, .desktop {
   display: none;
 }
@@ -128,7 +137,7 @@ body {
     padding: 5vw;
   }
   .main-sidebar {
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(250, 250, 250);
     width: 16vw;
     padding: 2vw;
   }
