@@ -113,6 +113,7 @@ h1 {
 .main-container {
   display: flex;
   width: 100vw;
+  min-height: calc(100vh - 80px);
 }
 .main-content {
   width: 90vw;
