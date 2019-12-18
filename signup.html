@@ -27,54 +27,50 @@
     <div class="main-container">
       <div class="main-content-full">
         <h1>Sign Up</h1>
-        <input id="username" placeholder="Username">
+        <input id="email" placeholder="Personal Email">
         <input id="password" type="password" placeholder="Password">
         <input id="name-first" placeholder="First Name">
         <input id="name-last" placeholder="Last Name">
         <input id="phone" placeholder="Phone Number">
-        <input id="email" placeholder="Personal Email">
         <button onclick="signup()">Sign Up</button>
         <p>Already have an account? <a href="login.html">Login up instead</a>.</p>
       </div>
     </div>
     <script src="javascript.js"></script>
     <script>
-      // actionCodeSettings object for signing up and logging in
-      var actionCodeSettings = {
-        // URL you want to redirect back to. The domain (www.example.com) for this
-        // URL must be whitelisted in the Firebase Console.
-        url: 'https://www.whapstudygroup.tk/index.html',
-        // This must be true.
-        handleCodeInApp: true//,
-      //   iOS: {
-      //     bundleId: 'com.example.ios'
-      //   },
-      //   android: {
-      //     packageName: 'com.example.android',
-      //     installApp: true,
-      //     minimumVersion: '12'
-      //   },
-      //   dynamicLinkDomain: 'example.page.link'
-      };
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          alert("SIGNED IN");
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          // ...
+        } else {
+          alert("SIGNED OUT");
+          // User is signed out.
+          // ...
+        }
+      });
       function signup() {
-        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var name_first = document.getElementById("name-first").value;
         var name_last = document.getElementById("name-last").value;
         var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
+
         // Do some firebase stuff; setup firebase in javascript.js
-        firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-          .then(function() {
-            // The link was successfully sent. Inform the user.
-            // Save the email locally so you don't need to ask the user for it again
-            // if they open the link on the same device.
-            alert("An email has been sent to you. Check your email to verify your account.");
-            window.localStorage.setItem('emailForSignIn', email);
-          })
-          .catch(function(error) {
-            // Some error occurred, you can inspect the code: error.code
-          });
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+        });
       }
     </script>
   </body>
