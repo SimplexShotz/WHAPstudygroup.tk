@@ -63,7 +63,12 @@
         var name_first = document.getElementById("name-first").value;
         var name_last = document.getElementById("name-last").value;
         var phone = document.getElementById("phone").value;
-
+        
+        if (password.length < 8) {
+          alert("Password must be at least 8 characters.");
+          return;
+        }
+        
         // Do some firebase stuff; setup firebase in javascript.js
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
           // Handle Errors here.
@@ -71,6 +76,7 @@
           var errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
+          alert("[ERROR]: " + errorMessage);
         });
       }
     </script>
