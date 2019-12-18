@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WHAP Study Group | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WHAP Study Group | Login</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap">
     <link rel="stylesheet" href="stylesheet.css">
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
@@ -12,7 +13,7 @@
   <body>
     <div class="header-main">
       <div class="logo-large"><span class="logo-large-text">WHAP</span></div>
-      <div class="header-main-text tablet">WHAP Study Group | Home</div>
+      <div class="header-main-text tablet">WHAP Study Group | Login</div>
     </div>
     <div class="header-sticky">
       <div class="logo-small"><span class="logo-small-text">WHAP</span></div>
@@ -26,19 +27,36 @@
     </div>
     <div class="main-container">
       <div class="main-content-full">
-        <h1>Login</h1>
-        <input id="username" placeholder="Username">
-        <input id="password" type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <p>Don't have an account? <a href="signup.html">Sign up instead</a>.</p>
+        <div class="form">
+          <h1>Login</h1>
+          <input id="email" placeholder="Email">
+          <input id="password" type="password" placeholder="Password">
+          <button onclick="login()">Login</button>
+          <div id="form1-alert"></div>
+          <p>Don't have an account? <a href="signup.html">Sign up instead</a>.</p>
+        </div>
       </div>
     </div>
     <script src="javascript.js"></script>
     <script>
       function login() {
-        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
-        // Do some firebase stuff; setup firebase in javascript.js
+
+        var ret = false;
+        document.getElementById("form1-alert").innerHTML = "";
+        if (!email) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your email.</div>"; ret = true; }
+        if (!password) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your password.</div>"; ret = true; }
+        if (ret) { return; }
+
+        // Login:
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Error Handling:
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode === "auth/invalid-email" || errorCode === "auth/user-not-found" || errorCode === "auth/wrong-password") { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>There is no account with that email and password. Try entering a different email/password or create a new account by clicking \"Sign up instead\" below.</div>"; }
+          else { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Something went wrong. Contact the developer at \"mail@WHAPstudygroup.tk\". \nThe error code is \"" + errorCode + "\".</div>"; }
+        });
       }
     </script>
   </body>

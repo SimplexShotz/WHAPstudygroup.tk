@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WHAP Study Group | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WHAP Study Group | Sign Up</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap">
     <link rel="stylesheet" href="stylesheet.css">
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
@@ -12,7 +13,7 @@
   <body>
     <div class="header-main">
       <div class="logo-large"><span class="logo-large-text">WHAP</span></div>
-      <div class="header-main-text tablet">WHAP Study Group | Home</div>
+      <div class="header-main-text tablet">WHAP Study Group | Sign Up</div>
     </div>
     <div class="header-sticky">
       <div class="logo-small"><span class="logo-small-text">WHAP</span></div>
@@ -26,58 +27,49 @@
     </div>
     <div class="main-container">
       <div class="main-content-full">
-        <h1>Sign Up</h1>
-        <input id="email" placeholder="Personal Email">
-        <input id="password" type="password" placeholder="Password">
-        <input id="name-first" placeholder="First Name">
-        <input id="name-last" placeholder="Last Name">
-        <input id="phone" placeholder="Phone Number">
-        <button onclick="signup()">Sign Up</button>
-        <p>Already have an account? <a href="login.html">Login instead</a>.</p>
+        <div class="form">
+          <h1>Sign Up</h1>
+          <input id="email" placeholder="Personal Email">
+          <input id="password" type="password" placeholder="Password">
+          <input id="name-first" placeholder="First Name">
+          <input id="name-last" placeholder="Last Name">
+          <input id="name-display" placeholder="Display Name">
+          <input id="phone" placeholder="Phone Number">
+          <button onclick="signup()">Sign Up</button>
+          <div id="form1-alert"></div>
+          <p>Already have an account? <a href="login.html">Login instead</a>.</p>
+        </div>
       </div>
     </div>
     <script src="javascript.js"></script>
     <script>
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          alert("SIGNED IN");
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          console.log(user);
-          // ...
-        } else {
-          alert("SIGNED OUT");
-          // User is signed out.
-          // ...
-        }
-      });
       function signup() {
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var name_first = document.getElementById("name-first").value;
         var name_last = document.getElementById("name-last").value;
+        var name_display = document.getElementById("name-display").value;
         var phone = document.getElementById("phone").value;
-        
+
+        var ret = false;
+        document.getElementById("form1-alert").innerHTML = "";
+        if (!email) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your email.</div>"; ret = true; }
+        if (!password) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter a password.</div>"; ret = true; }
+        if (!name_first) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your first name.</div>"; ret = true; }
+        if (!name_last) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your last name.</div>"; ret = true; }
+        if (!name_display) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter a display name.</div>"; ret = true; }
+        if (!phone) { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Enter your phone number.</div>"; ret = true; }
+        if (ret) { return; }
+
         // Create Account:
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
           // Error handling:
           var errorCode = error.code;
           var errorMessage = error.message;
-          if (errorCode === "auth/email-already-in-use") {
-            alert("That email is already in use! If you already have an account, login by clicking \"Login instead\" below.");
-          } else if (errorCode === "auth/invalid-email") {
-            alert("That email is invalid! Make sure you typed your email in correctly.");
-          } else if (errorCode === "auth/weak-password") {
-            alert("That password is weak! Make sure your password is at least 6 characters long.");
-          } else {
-            alert("Something went wrong. Contact the developer at \"mail@WHAPstudygroup.tk\". \nThe error code is \"" + errorCode + "\".");
-          }
+          if (errorCode === "auth/email-already-in-use") { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>That email is already in use! If you already have an account, login by clicking \"Login instead\" below.</div>"; }
+          else if (errorCode === "auth/invalid-email") { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>That email is invalid! Make sure you typed your email in correctly.</div>"; }
+          else if (errorCode === "auth/weak-password") { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>That password is weak! Make sure your password is at least 6 characters long.</div>"; }
+          else { document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Something went wrong. Contact the developer at \"mail@WHAPstudygroup.tk\". \nThe error code is \"" + errorCode + "\".</div>"; }
         });
       }
     </script>

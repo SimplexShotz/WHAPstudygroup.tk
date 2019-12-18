@@ -12,6 +12,19 @@ if (!('IntersectionObserver' in window) ||
   observer.observe(document.getElementsByClassName("header-sticky")[0]);
 }
 
+// Add / remove class functions
+function removeClass(cl) {
+  for (var i = 0; i < document.getElementsByClassName(cl).length; i++) {
+    document.getElementsByClassName(cl)[i].classList.remove(cl);
+    i--;
+  }
+}
+function addClass(cl, el) {
+  if (el) {
+    el.classList.add(cl);
+  }
+}
+
 // Firebase setup
 var firebaseConfig = {
     apiKey: "AIzaSyAp2aDCkaCC_xBXTg6pCYUrOTrGs-Vp9m0",
@@ -30,6 +43,33 @@ firebase.analytics();
 
 var database = firebase.database();
 
-var ref = {
-    users: database.ref("users")
-};
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    if (document.getElementById("form1-alert")) {
+      if (user.metadata.lastSignInTime === user.metadata.creationTime && document.getElementById("name-display")) {
+        user.updateProfile({
+          displayName: document.getElementById("name-display").value
+        }).then(function() {
+          document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Sign up successful! You are now logged in as \"" + user.email + "\".</div>";
+        }).catch(function(error) {
+          var errorCode = error.code;
+          document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Something went wrong. Contact the developer at \"mail@WHAPstudygroup.tk\". \nThe error code is \"" + errorCode + "\".</div>";
+        });
+      } else { document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Login successful! You are now logged in as \"" + user.email + "\".</div>"; }
+    }
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // console.log(user);
+    // ...
+  } else {
+    // alert("SIGNED OUT");
+    // User is signed out.
+    // ...
+  }
+});

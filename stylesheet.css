@@ -1,5 +1,5 @@
 * {
-  font-family: "Roboto";
+  font-family: "Roboto", Helvetica, "Trebuchet MS";
   font-weight: 300;
 }
 body {
@@ -11,6 +11,14 @@ body {
 }
 h1 {
   font-weight: 500;
+}
+p {
+  font-size: 16pt;
+}
+a {
+  color: rgb(100, 100, 225);
+  text-decoration: none;
+  transition: all 0.5s;
 }
 
 .logo-large {
@@ -120,6 +128,80 @@ h1 {
 .main-content {
   width: 90vw;
   padding: 5vw;
+}
+.main-content-full {
+  width: 50vw;
+  padding: 0px 25vw;
+}
+
+.form {
+  padding-top: 50px;
+  text-align: center;
+}
+.form input {
+  display: block;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 3px solid rgb(200, 200, 200);
+  border-radius: 10px 10px 0px 10px;
+  font-size: 16pt;
+  transition: all 0.5s;
+}
+.form input:focus {
+  outline: none;
+  border: 3px solid rgb(100, 100, 225);
+}
+.form button {
+  display: block;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 10px 25px;
+  border: 3px solid rgb(200, 200, 200);
+  border-radius: 10px 10px 0px 10px;
+  font-size: 16pt;
+  margin: auto;
+  transition: all 0.5s;
+}
+.form button:hover {
+  border: 3px solid rgb(100, 100, 225);
+  cursor: pointer;
+}
+.form button:focus {
+  outline: none;
+}
+.form p {
+  color: rgb(200, 200, 200);
+  font-size: 16pt;
+}
+
+.alert-error {
+  display: block;
+  background-color: rgb(225, 100, 100);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  margin-top: 10px;
+  border: 3px solid rgb(225, 75, 75);
+  border-radius: 10px 10px 0px 10px;
+  font-size: 16pt;
+}
+.alert-error::before {
+  content: "[ERROR]: ";
+}
+.alert-success {
+  display: block;
+  background-color: rgb(100, 225, 100);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  margin-top: 10px;
+  border: 3px solid rgb(75, 225, 75);
+  border-radius: 10px 10px 0px 10px;
+  font-size: 16pt;
+}
+.alert-success::before {
+  content: "[SUCCESS]: ";
 }
 
 .tablet, .desktop {
