@@ -28,10 +28,11 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+var database = firebase.database();
+
 var ref = {
     users: database.ref("users")
 };
-var database = firebase.database();
 
 // actionCodeSettings object for signing up and logging in
 var actionCodeSettings = {
