@@ -20,6 +20,11 @@ a {
   text-decoration: none;
   transition: all 0.5s;
 }
+input[type=text] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 .logo-large {
   background-color: rgb(75, 75, 225);
@@ -177,6 +182,9 @@ a {
   font-size: 16pt;
 }
 
+.alert {
+  overflow-x: scroll;
+}
 .alert-error {
   display: block;
   background-color: rgb(225, 100, 100);
