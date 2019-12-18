@@ -78,6 +78,7 @@ h1 {
 }
 .header-sticky[stuck] .logo-small {
   width: 40px;
+  hieght: 40px;
   opacity: 1;
   padding: 10px;
   margin: 10px 2vw 10px 0px;
@@ -89,6 +90,7 @@ h1 {
   height: 80px;
   overflow-x: auto;
   overflow-y: hidden;
+  flex: 1;
 }
 .link {
   color: rgb(50, 50, 50);
