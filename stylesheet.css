@@ -20,10 +20,8 @@ a {
   text-decoration: none;
   transition: all 0.5s;
 }
-input[type=text] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+input {
+  background-clip: padding-box;
 }
 
 .logo-large {
