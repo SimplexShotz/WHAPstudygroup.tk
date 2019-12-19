@@ -182,9 +182,6 @@ input[type=text] {
   font-size: 16pt;
 }
 
-.alert {
-  overflow-x: scroll;
-}
 .alert-error {
   display: block;
   background-color: rgb(225, 100, 100);
@@ -194,6 +191,7 @@ input[type=text] {
   border: 3px solid rgb(225, 75, 75);
   border-radius: 10px 10px 0px 10px;
   font-size: 16pt;
+  overflow-x: auto;
 }
 .alert-error::before {
   content: "[ERROR]: ";
@@ -207,6 +205,7 @@ input[type=text] {
   border: 3px solid rgb(75, 225, 75);
   border-radius: 10px 10px 0px 10px;
   font-size: 16pt;
+  overflow-x: auto;
 }
 .alert-success::before {
   content: "[SUCCESS]: ";

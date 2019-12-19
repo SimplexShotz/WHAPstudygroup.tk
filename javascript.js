@@ -51,12 +51,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         user.updateProfile({
           displayName: document.getElementById("name-display").value
         }).then(function() {
-          document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Sign up successful! You are now logged in as \"" + user.email + "\".</div>";
+          document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Sign up successful! You are now logged in as \"" + user.displayName + "\".</div>";
         }).catch(function(error) {
           var errorCode = error.code;
           document.getElementById("form1-alert").innerHTML += "<div class='alert-error'>Something went wrong. Contact the developer at \"mail@WHAPstudygroup.tk\". \nThe error code is \"" + errorCode + "\".</div>";
         });
-      } else { document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Login successful! You are now logged in as \"" + user.email + "\".</div>"; }
+      } else { document.getElementById("form1-alert").innerHTML += "<div class='alert-success'>Login successful! You are now logged in as \"" + user.displayName + "\".</div>"; }
     }
     var displayName = user.displayName;
     var email = user.email;
